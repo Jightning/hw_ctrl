@@ -13,7 +13,7 @@ export const IntegrationDetailsWindow = ({integration}: {integration: Integratio
                         <Icon fill={integration.color} className="w-12 h-12 text-slate-700" />
                         <div>
                             <h1 className="text-2xl font-bold mb-1">{integration.name}</h1>
-                            <span className="text-sm text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded-full">Connected</span>
+                            <ConnectionIcon connected={integration.connected} />
                         </div>
                     </div>
 
@@ -52,5 +52,22 @@ export const IntegrationDetailsWindow = ({integration}: {integration: Integratio
                 </Card>
             )}
         </div>
+    )
+}
+
+
+const ConnectionIcon = ({connected}: {connected: boolean}) => {
+    return (
+        <>
+            {connected ? 
+                <span className="text-sm text-green-600 font-medium bg-green-50 px-2.5 py-0.5 rounded-full">
+                    Connected
+                </span>
+                :
+                <span className="text-sm text-red-600 font-medium bg-red-50 px-2.5 py-0.5 rounded-full">
+                    Disconnected
+                </span>
+            }
+        </>
     )
 }

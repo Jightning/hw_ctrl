@@ -3,13 +3,14 @@ import Icon from "@/components/ui/Icon"
 import { selectIntegrations } from "@/lib/features/integrationSlice"
 import { useAppSelector } from "@/lib/hooks/hooks"
 import { Integration } from "@/types"
+import Link from "next/link"
 
 interface IntegrationListProps {
     selectedIntegration: Integration | null,
     setSelectedIntegration: React.Dispatch<React.SetStateAction<Integration | null>>
 }
 
-export const IntegrationsList = ({selectedIntegration, setSelectedIntegration}: IntegrationListProps) => {
+export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }: IntegrationListProps) => {
     const integrations = useAppSelector(selectIntegrations)
 
     const handleSelect = (integration: Integration) => {
@@ -48,11 +49,8 @@ export const IntegrationsList = ({selectedIntegration, setSelectedIntegration}: 
                                             <p className={`font-semibold ${selectedIntegration?.name === integration.name ? 'text-indigo-800' : 'text-slate-800'}`}>{integration.name}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-3 ml-4 flex-shrink-0">
-                                        <span className="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full ring-1 ring-inset ring-green-200">
-                                            Connected
-                                        </span>
-                                    </div>
+                                    
+                                    <ConnectionIcon connected={integration.connected} />
                                 </button>
                             </li>
                         ))}
@@ -63,10 +61,13 @@ export const IntegrationsList = ({selectedIntegration, setSelectedIntegration}: 
                 <div className="border-t border-slate-200 flex-shrink-0">
                     {!selectedIntegration ? (
                         <div className="p-4 bg-slate-50/75">
-                            <button className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700  shadow-sm cursor-pointer">
+                            <Link
+                                href="/integrations/new"
+                                className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700  shadow-sm cursor-pointer"
+                            >
                                 <Icon name="plus" fill={"#FFF"} className="w-5 h-5"/>
                                 <span>Add New Integration</span>
-                            </button>
+                            </Link>
                         </div>
                     ) : (
                         <div className="p-2">
@@ -79,46 +80,22 @@ export const IntegrationsList = ({selectedIntegration, setSelectedIntegration}: 
                 </div>
             </Card>
         </div>
-        // <Card>
-        //     <div className="p-4 sm:p-6 flex justify-between items-center border-b border-slate-200">
-        //         <div>	
-		// 			    <h1 className="text-lg font-semibold">Integrations</h1>
-		// 			    <p className="text-sm text-slate-500 mt-1">Click on an integration to see more details or manage its settings.</p>
-		// 		    </div>
-        //         <button className="p-1.5 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors cursor-pointer" aria-label="Help">
-        //             <Icon name="question" className="w-5 h-5"/>
-        //         </button>
-        //     </div>
-        //     <ul className="divide-y divide-slate-200">
-        //         {integrations.map(integration => (
-        //             <li key={integration.name}>
-        //                 <button
-        //                     onClick={() => handleSelect(integration)}
-        //                     className="w-full flex items-center justify-between p-4 sm:p-6 hover:bg-slate-50 transition-colors text-left cursor-pointer"
-        //                     aria-label={`View details for ${integration.name}`}
-        //                 >
-        //                     <div className="flex items-center space-x-4">
-        //                         <Icon fill={integration.color} className="w-10 h-10 text-slate-700"/>
-        //                         <div>
-        //                             <p className="font-semibold text-slate-800">{integration.name}</p>
-        //                         </div>
-        //                     </div>
-        //                     <div className="flex items-center space-x-3 ml-4 flex-shrink-0">
-        //                         <span className="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full ring-1 ring-inset ring-green-200">
-        //                             Connected
-        //                         </span>
-        //                     </div>
-        //                 </button>
-        //             </li>
-        //         ))}
-        //     </ul>
+    )
+}
 
-        //     <div className="p-4 bg-slate-50/75 border-t border-slate-200">
-        //         <button className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm cursor-pointer">
-        //             <Icon name="plus" fill={"#FFF"} className="w-5 h-5"/>
-        //             <span>Add New Integration</span>
-        //         </button>
-        //     </div>
-        // </Card>
+
+const ConnectionIcon = ({connected}: {connected: boolean}) => {
+    return (
+        <div className="flex items-center space-x-3 ml-4 flex-shrink-0">
+            {connected ? 
+                <span className="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full ring-1 ring-inset ring-green-200">
+                    Connected
+                </span>
+                :
+                <span className="text-xs font-medium text-red-700 bg-red-100 px-2 py-1 rounded-full ring-1 ring-inset ring-red-200">
+                    Disconnected
+                </span>
+            }
+        </div>
     )
 }

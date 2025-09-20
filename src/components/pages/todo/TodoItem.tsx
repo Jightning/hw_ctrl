@@ -37,8 +37,12 @@ export const TodoItem: React.FC<{ work: Work }> = ({ work }) => {
 			<div className="flex-grow">
 				<p className={`font-semibold text-slate-800 ${work.completed ? 'line-through' : ''}`}>{work.title}</p>
 				<div className="flex items-center text-sm space-x-2 text-slate-500 mt-1">
-					<span className="w-fit">{currentSubject?.name || 'No Subject'}</span>
-					{currentSubject && <span className="text-slate-300">&bull;</span>}
+					{currentSubject && 
+						<>
+							<span className="w-fit">{currentSubject?.name}</span>
+							<span className="text-slate-300">&bull;</span>
+						</>
+					}
 					<span className="w-fit">{work.dueDate ? (isHoveredOver ? new Date(work.dueDate).toLocaleDateString() : humanizeDate(work.dueDate)) : 'No Due Date'}</span>
 				</div>
 			</div>

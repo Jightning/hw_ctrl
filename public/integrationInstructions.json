@@ -1,0 +1,64 @@
+[
+    { 
+        "name": "Canvas LMS", 
+        "integrationId": "canvas_lms",
+        "color": "#E04A3F",
+        "tutorial": {
+            "title": "Connecting to Canvas LMS",
+            "steps": [
+                {"type": "text", "content": "Log in to your Canvas administrator account for your institution."},
+                {"type": "text", "content": "Go to Admin > Developer Keys (sometimes under Settings > Developer Keys)."},
+                {"type": "text", "content": "Click \"+ Developer Key\" and choose \"API Key\" or \"LTI Key\" depending on your setup."},
+                {"type": "text", "content": "Give the key a name and set the required redirect URIs and scopes (at minimum: read access to courses and assignments as needed)."},
+                {"type": "text", "content": "Save the developer key. Copy the Client ID and Client Secret (or the generated API token) and paste them into the fields below in Academia."},
+                {"type": "text", "content": "If using OAuth, follow your institution's OAuth flow to authorize Academia to access Canvas on behalf of a user."}
+            ]
+        }
+    },
+    { 
+        "name": "Brightspace",
+        "integrationId": "brightspace",  
+        "color": "#000000",
+        "tutorial": {
+            "title": "Connecting to Brightspace",
+            "steps": [
+                {"type": "text", "content": "Log in to your Brightspace (D2L) administrator account or obtain access from your institution's Brightspace admin."},
+                {"type": "text", "content": "Go to Admin Tools > API Management (or the OAuth2/Developer settings page)."},
+                {"type": "text", "content": "Create a new application/client and provide a name and redirect URI for Academia."},
+                {"type": "text", "content": "Set the necessary scopes/permissions for reading courses and assignments (consult your Brightspace admin for exact scope names)."},
+                {"type": "text", "content": "Save the application and copy the Client ID and Client Secret into the fields below in Academia."},
+                {"type": "text", "content": "Complete the OAuth2 flow in Academia to authorize access for your account or a user with the required privileges."}
+            ]
+        }
+    },
+    { 
+        "name": "Google Classroom", 
+        "integrationId": "google-classroom",  
+        "tutorial": {
+            "title": "Connecting to Google Classroom",
+            "steps": [
+                {"type": "text", "content": "Go to the Google Cloud Console and create a new project."},
+                {"type": "text", "content": "In the navigation menu, go to \"APIs & Services\" > \"Library\"."},
+                {"type": "text", "content": "Search for \"Google Classroom API\" and enable it for your project."},
+                {"type": "text", "content": "Go to \"APIs & Services\" > \"Credentials\"."},
+                {"type": "text", "content": "Click \"Create Credentials\" and choose \"API key\"."},
+                {"type": "text", "content": "Copy the generated API key and paste it into the field below."}
+            ]
+        }
+    },
+    { 
+        "name": "Slack", 
+        "icon": "slack",
+        "tutorial": {
+            "title": "Connecting to Slack",
+            "steps": [
+                {"type": "text", "content": "Go to api.slack.com/apps and click \"Create New App\"."},
+                {"type": "text", "content": "Choose \"From scratch\", name your app \"Academia\", and select your workspace."},
+                {"type": "text", "content": "In the sidebar under \"Features\", navigate to \"OAuth & Permissions\"."},
+                {"type": "text", "content": "Scroll down to \"Bot Token Scopes\" and add the scopes you need (e.g., `channels:read`, `chat:write`)."},
+                {"type": "text", "content": "At the top of the \"OAuth & Permissions\" page, click \"Install to Workspace\"."},
+                {"type": "text", "content": "Copy the \"Bot User OAuth Token\" that is generated. This is your API key."}
+            ]
+        }
+    }
+]

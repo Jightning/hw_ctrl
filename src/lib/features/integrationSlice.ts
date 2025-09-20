@@ -5,20 +5,20 @@ import { IntegrationState } from '@/types'
 // Define the initial state using that type
 const initialState: IntegrationState = {
     integrationsData: [{
-        name: 'Canvas',
-        id: 'canvas', 
-        logoUrl: '/integrations/canvas.png',
+        name: 'Canvas LMS',
+        id: 'canvas_lms', 
         color: '#E04A3F',
+        connected: true
     }, {
-        name: 'Blackboard',
-        id: 'blackboard',
-        logoUrl: '/integrations/blackboard.png',
+        name: 'Brightspace',
+        id: 'brightspace',
         color: '#000000',
+        connected: false
     }, {
         name: 'Google Classroom',
         id: 'google-classroom',
-        logoUrl: '/integrations/google-classroom.png',
-        color: '#4285F4',
+        color: '#0F0',
+        connected: true
     }]
 }
 

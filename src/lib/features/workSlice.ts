@@ -7,14 +7,14 @@ const initialState: WorkState = {
     workData: [{
         title: 'Homework 5: Recursion',
         id: 'hw5-recursion',
-        integrationId: 'canvas',
+        integrationId: 'canvas_lms',
         subjectId: 'comp101',
         dueDate: new Date(2025, 11, 11).toISOString(),
         completed: false,
     }, {
         title: 'Speaking Skills Assignment',
         id: 'speaking-skills-assignment',
-        integrationId: 'blackboard',
+        integrationId: 'brightspace',
         dueDate: new Date(2025, 8, 18).toISOString(),
         subjectId: 'coms199101',
         completed: false,
@@ -24,6 +24,13 @@ const initialState: WorkState = {
         id: 'lab-report',
         integrationId: 'google-classroom',
         subjectId: 'eng161',
+        completed: false,
+    },
+    {
+        title: 'Missing Dog: A Discovery',
+        id: 'miss-disc',
+        integrationId: 'unknown',
+        subjectId: 'also unknown',
         completed: false,
     }]
 }

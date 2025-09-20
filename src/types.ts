@@ -1,11 +1,12 @@
 export interface Integration {
 	name: string,
 	id: string,
-	logoUrl: string,
-	color: string,
+	logoUrl?: string,
+	color?: string,
 	subjects?: Subject["id"][],
-	
+
 	lastSync?: string
+	connected: boolean
 }
 
 export interface IntegrationState {
@@ -48,6 +49,19 @@ export interface Filters {
 }
 
 
+export interface IntegrationTutorial {
+	name: string
+	integrationId: string
+	logoUrl?: string
+	color?: string
+	tutorial?: {
+		title: string
+		steps: {
+			type: 'text' | 'image'
+			content: string
+		}[]
+	} 
+}	
 
 
 // export interface Todo {
