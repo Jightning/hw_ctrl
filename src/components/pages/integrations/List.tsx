@@ -7,7 +7,7 @@ import Link from "next/link"
 
 interface IntegrationListProps {
     selectedIntegration: Integration | null,
-    setSelectedIntegration: React.Dispatch<React.SetStateAction<Integration | null>>
+    setSelectedIntegration: (integration: Integration | null) => void
 }
 
 export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }: IntegrationListProps) => {
@@ -19,7 +19,7 @@ export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }
 
     return (
         // transition-all duration-500 ease-in-out
-        <div className={` justify-self-left ${selectedIntegration ? 'w-full md:w-80 flex-shrink-0' : 'w-full max-w-3xl '}`}>
+        <div className={`justify-self-left ${selectedIntegration ? 'w-full md:w-80 flex-shrink-0' : 'w-full max-w-3xl '}`}>
             <Card className="h-full flex flex-col">
                 {/* Header */}
                 <div className="p-4 sm:p-6 flex justify-between items-center border-b border-slate-200 flex-shrink-0">
@@ -59,8 +59,7 @@ export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }
                 
                 {/* Add new integration/back button */}
                 <div className="border-t border-slate-200 flex-shrink-0">
-                    {!selectedIntegration ? (
-                        <div className="p-4 bg-slate-50/75">
+                    <div className="p-4 bg-slate-50/75">
                             <Link
                                 href="/integrations/new"
                                 className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700  shadow-sm cursor-pointer"
@@ -69,7 +68,7 @@ export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }
                                 <span>Add New Integration</span>
                             </Link>
                         </div>
-                    ) : (
+                    {selectedIntegration && (
                         <div className="p-2">
                             <button onClick={() => setSelectedIntegration(null)} className="w-full flex items-center space-x-2 font-medium text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 cursor-pointer">
                                 <Icon name="chevronLeft" className="w-5 h-5"/>

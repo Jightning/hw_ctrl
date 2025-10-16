@@ -48,7 +48,7 @@ export interface Filters {
 	showCompleted: boolean;
 }
 
-
+ 
 export interface IntegrationTutorial {
 	name: string
 	integrationId: string

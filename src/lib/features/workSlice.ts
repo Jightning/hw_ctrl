@@ -14,7 +14,7 @@ const initialState: WorkState = {
     }, {
         title: 'Speaking Skills Assignment',
         id: 'speaking-skills-assignment',
-        integrationId: 'brightspace',
+        integrationId: 'unknown',
         dueDate: new Date(2025, 8, 18).toISOString(),
         subjectId: 'coms199101',
         completed: false,

@@ -8,8 +8,8 @@ import { useAppSelector } from '@/lib/hooks/hooks';
 import { IntegrationTutorial } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { sep } from 'path';
 import React, { useEffect, useState } from 'react';
+import { z } from 'zod';
 
 type stages = 'form' | 'verifying' | 'overview'
 interface FormInformation {
@@ -17,6 +17,18 @@ interface FormInformation {
     apiKey: string,
     customName?: string
 }
+
+const schema: z.ZodSchema<FormInformation> = z.object({
+    integrationSelection: z.string().min(1, 'Platform Required'),
+    apiKey: z.string().min(1, 'API Key Required'),
+    customName: z.string().optional()
+}).superRefine((val, ctx) => {
+    if (val.integrationSelection === 'custom') {
+        if (!val.customName || !val.customName.trim()) {
+            ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['customName'], message: 'Custom Name Required for Custom Platform' });
+        }
+    }
+});
 
 const initialFormInformation: FormInformation = {
     integrationSelection: "custom",
@@ -63,7 +75,6 @@ export default function Page() {
 
     const availableIntegrations = integrationInstructions.filter((int) => !integrations.some(usedInt => int.integrationId === usedInt.id))
     const currentIntegrationInstructions = integrationInstructions.find(d => (d.integrationId || d.name) === formInformation.integrationSelection) || null;
-    console.log(currentIntegrationInstructions)
     
     return (
         <div className="flex justify-center">
@@ -94,7 +105,7 @@ export default function Page() {
                         <>
                             {/* Form */}
                             <div className="p-6 space-y-4">
-                                {/* Selecting Integration */}
+                                {/* Selecting Integration Platform */}
                                 <div>
                                     <label htmlFor="integration-select" className="block text-sm font-medium text-slate-700">Platform</label>
                                     <select

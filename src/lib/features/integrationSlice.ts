@@ -9,17 +9,20 @@ const initialState: IntegrationState = {
         id: 'canvas_lms', 
         color: '#E04A3F',
         connected: true
-    }, {
-        name: 'Brightspace',
-        id: 'brightspace',
-        color: '#000000',
-        connected: false
-    }, {
+    }, 
+    {
         name: 'Google Classroom',
         id: 'google-classroom',
         color: '#0F0',
         connected: true
-    }]
+    },
+    // {
+    //     name: 'Brightspace',
+    //     id: 'brightspace',
+    //     color: '#000000',
+    //     connected: false
+    // }
+]
 }
 
 export const integrationsSlice = createSlice({
