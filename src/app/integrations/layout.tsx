@@ -4,14 +4,16 @@ import { IntegrationsList } from '@/components/pages/integrations/List';
 import { selectIntegrations } from '@/lib/features/integrationSlice';
 import { useAppSelector } from '@/lib/hooks/hooks';
 import { Integration } from '@/types';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const { id } = useParams<{ id?: string }>();
+    const pathname = usePathname().split('/');
 
     const integrations = useAppSelector(selectIntegrations)
     const selectedIntegration = integrations.find(int => int.id === id) || null;
+    const isSideList = selectedIntegration !== null || pathname[2] === 'new';
 
     const handleSelect = (integration: Integration | null) => {
         if (!integration) {
@@ -24,7 +26,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row justify-center">
-            <IntegrationsList selectedIntegration={selectedIntegration} setSelectedIntegration={handleSelect} />
+            <IntegrationsList selectedIntegration={selectedIntegration} setSelectedIntegration={handleSelect} isSideList={isSideList} />
             {children}
         </div>
     );

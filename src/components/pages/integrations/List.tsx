@@ -7,10 +7,11 @@ import Link from "next/link"
 
 interface IntegrationListProps {
     selectedIntegration: Integration | null,
-    setSelectedIntegration: (integration: Integration | null) => void
+    setSelectedIntegration: (integration: Integration | null) => void,
+    isSideList?: boolean // If true, shrink the list to the side
 }
 
-export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }: IntegrationListProps) => {
+export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration, isSideList }: IntegrationListProps) => {
     const integrations = useAppSelector(selectIntegrations)
 
     const handleSelect = (integration: Integration) => {
@@ -19,7 +20,7 @@ export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }
 
     return (
         // transition-all duration-500 ease-in-out
-        <div className={`justify-self-left ${selectedIntegration ? 'w-full md:w-80 flex-shrink-0' : 'w-full max-w-3xl '}`}>
+        <div className={`justify-self-left ${isSideList ? 'w-full md:w-80 flex-shrink-0' : 'w-full max-w-3xl '}`}>
             <Card className="h-full flex flex-col">
                 {/* Header */}
                 <div className="p-4 sm:p-6 flex justify-between items-center border-b border-slate-200 flex-shrink-0">
@@ -68,7 +69,7 @@ export const IntegrationsList = ({ selectedIntegration, setSelectedIntegration }
                                 <span>Add New Integration</span>
                             </Link>
                         </div>
-                    {selectedIntegration && (
+                    {isSideList && (
                         <div className="p-2">
                             <button onClick={() => setSelectedIntegration(null)} className="w-full flex items-center space-x-2 font-medium text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 cursor-pointer">
                                 <Icon name="chevronLeft" className="w-5 h-5"/>

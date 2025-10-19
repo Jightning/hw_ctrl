@@ -77,8 +77,8 @@ export default function Page() {
     const currentIntegrationInstructions = integrationInstructions.find(d => (d.integrationId || d.name) === formInformation.integrationSelection) || null;
     
     return (
-        <div className="flex justify-center">
-            <div className="w-full max-w-3xl">
+        <div className="flex-1 flex justify-center">
+            <div className="px-6 h-fit w-full ">
                 <Card>
                     {/* Header */}
                     <div className="p-4 sm:p-6 flex items-center border-b border-slate-200">
@@ -97,6 +97,7 @@ export default function Page() {
                                 <Icon name="arrowLeft" className="w-5 h-5"/>
                             </Link>
                         }
+
                         <h2 className="text-lg font-semibold">{stage === 'overview' ? 'Connection Overview' : 'Add New Platform'}</h2>
                     </div>
                     
@@ -126,7 +127,7 @@ export default function Page() {
 
                                 {/* Form if integration is custom */}
                                 {formInformation.integrationSelection === 'custom' && (
-                                    <div className="animate-fadeIn">
+                                    <div>
                                         <label htmlFor="custom-integration-name" className="block text-sm font-medium text-slate-700">Custom Platform Name</label>
                                         <input 
                                             type="text" 
@@ -138,7 +139,7 @@ export default function Page() {
 
                                 {/* Form if integration setup is already established */}
                                 {formInformation.integrationSelection && currentIntegrationInstructions && (
-                                    <div className="animate-fadeIn mt-6 space-y-4">
+                                    <div className="mt-6 space-y-4">
                                         {/* Api key */}
                                         <div>
                                             <label htmlFor="api-key" className="block text-sm font-medium text-slate-700">API Key</label>
